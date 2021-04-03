@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IndexViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Welcome Bowlers</h1>
+    <h3>Team @Model.TeamName</h3>
+    @if (@Model.Bowlers.Count() == 0)
+    {
+        <p>No Team Members Found</p>
+    }
+    @if (@Model.Bowlers.Count() > 0)
+    {
+        <p>@Model.PageNumberingInfo.TotalNumItems Team Members</p>
+    }
+</div>
+<br />
+<br />
+
+
+@foreach (var x in Model.Bowlers)
+{
+    if (@x.BowlerMiddleInit is null)
+    {
+        <h4>@x.BowlerFirstName @x.BowlerMiddleInit @x.BowlerLastName</h4>
+        <h6>Contact Information</h6>
+        <p>Phone: @x.BowlerPhoneNumber</p>
+        <p>Address: @x.BowlerAddress @x.BowlerCity , @x.BowlerState @x.BowlerZip</p>
+        <br />
+    }
+
+    else
+    {
+        <h4>@x.BowlerFirstName @x.BowlerMiddleInit. @x.BowlerLastName</h4>
+        <h6>Contact Information</h6>
+        <p>Phone: @x.BowlerPhoneNumber</p>
+        <p>Address: @x.BowlerAddress @x.BowlerCity , @x.BowlerState @x.BowlerZip</p>
+        <br />
+    }
+
+}
+
+<div page-info="@Model.PageNumberingInfo" page-url-teamname="@Model.TeamName"></div>
